@@ -1,19 +1,23 @@
-<!--
-You are free to copy and use this sample in accordance with the terms of the
-Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
--->
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>Google Earth API Sample</title>
+    <title>RC Flying With Google Earth</title>
     <style>
         body, html { height:100%; padding:0; margin:0; }
     </style>
     <script src="http://www.google.com/jsapi?key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw" type="text/javascript"></script>
     <script type="text/javascript">
 
+        var ge;
+        var allPlacemarks = [];
+        var originalLs;
+        var originalCoords = [];
+        var lspm;
+        var allPlacemarksInFile;
+
         google.load('visualization', '1', {packages: ['annotatedtimeline']});
+        google.load("earth", "1");
 
         function initChart(placemarks) {
             var data = new google.visualization.DataTable();
@@ -32,19 +36,10 @@ Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
             annotatedtimeline.draw(data, {'displayAnnotations': true});
 
             google.visualization.events.addListener(annotatedtimeline,
-                'rangechange', function(){
+                    'rangechange', function(){
                         refreshGoogleEarth(annotatedtimeline.getVisibleChartRange().start, annotatedtimeline.getVisibleChartRange().end);
-                });
+                    });
         }
-
-        var ge;
-        var allPlacemarks = [];
-        var originalLs;
-        var originalCoords = [];
-        var lspm;
-        var allPlacemarksInFile;
-
-        google.load("earth", "1");
 
         function init() {
             google.earth.createInstance('map3d', initCallback, failureCallback);
@@ -53,6 +48,8 @@ Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
         function initCallback(instance) {
             ge = instance;
             ge.getWindow().setVisibility(true);
+
+            ge.getTime().getControl().setVisibility(ge.VISIBILITY_HIDE);
 
             // add a navigation control
             ge.getNavigationControl().setVisibility(ge.VISIBILITY_AUTO);
@@ -109,20 +106,11 @@ Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
             }
 
             // fetch the KML
-            var url = "http://localhost/earth/plane_new.kml";
+            //var url = "http://localhost/~shaun/googleearthflight/plane_new.kml";
+            var loc = window.location.href;
+            var dir = loc.substring(0, loc.lastIndexOf('/'));
+            var url = dir + "/plane_new.kml";
             google.earth.fetchKml(ge, url, finished);
-
-//            google.earth.addEventListener(ge.getView(), 'viewchange', function() {
-//                var lookAt = ge.getView().copyAsLookAt(ge.ALTITUDE_RELATIVE_TO_GROUND);
-//
-//                document.getElementById('lat').innerHTML = lookAt.getLatitude();
-//                document.getElementById('lon').innerHTML = lookAt.getLongitude();
-//                document.getElementById('alt').innerHTML = lookAt.getAltitude();
-//                document.getElementById('head').innerHTML = lookAt.getHeading();
-//                document.getElementById('tilt').innerHTML = lookAt.getTilt();
-//                document.getElementById('range').innerHTML = lookAt.getRange();
-//                document.getElementById('altmode').innerHTML = lookAt.getAltitudeMode();
-//            });
         }
 
         function failureCallback(errorCode) {
@@ -151,17 +139,10 @@ Apache license (http://www.apache.org/licenses/LICENSE-2.0.html)
     </script>
 </head>
 <body onload="init()">
+<div style="width:100%; height:100%">
 <div id="map3d" style="width:100%; height:70%;"></div>
 <div id="visualization" style="width:100%; height:30%;"></div>
-<!--<div id="view" style="width:100%; height:10%;">-->
-    <!--<div id="alt"></div>-->
-    <!--<div id="lat"></div>-->
-    <!--<div id="lon"></div>-->
-    <!--<div id="head"></div>-->
-    <!--<div id="tilt"></div>-->
-    <!--<div id="range"></div>-->
-    <!--<div id="altmode"></div>-->
-<!--</div>-->
+</div>
 </body>
 </html>
 ​
