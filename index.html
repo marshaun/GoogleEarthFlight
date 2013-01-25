@@ -110,6 +110,7 @@
             var loc = window.location.href;
             var dir = loc.substring(0, loc.lastIndexOf('/'));
             var url = dir + "/plane_new.kml";
+            console.log(url);
             google.earth.fetchKml(ge, url, finished);
         }
 
