@@ -100,17 +100,12 @@
                 {
                     originalCoords.push(origCoords.get(i));
                 }
-
-                console.log(allPlacemarks.length);
-                console.log(originalLs.getCoordinates().getLength());
             }
 
             // fetch the KML
-            //var url = "http://localhost/~shaun/googleearthflight/plane_new.kml";
             var loc = window.location.href;
             var dir = loc.substring(0, loc.lastIndexOf('/'));
             var url = dir + "/plane_new.kml";
-            console.log(url);
             google.earth.fetchKml(ge, url, finished);
         }
 

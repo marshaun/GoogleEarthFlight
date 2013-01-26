@@ -87,48 +87,6 @@
         <styleUrl>#gv_trackpoint_highlight</styleUrl>
       </Pair>
     </StyleMap>
-    <Folder id="Track markers">
-      <name><![CDATA[Track markers]]></name>
-      <visibility>1</visibility>
-      <Folder id="RC-Airplane---D: Laps">
-        <name><![CDATA[RC-Airplane---D: Laps]]></name>
-        <visibility>1</visibility>
-        <Placemark>
-          <name>Start</name>
-          <description><![CDATA[2013-01-19 21:18:07]]></description>
-          <styleUrl>#gv_waypoint</styleUrl>
-          <Style>
-            <IconStyle>
-              <color>FF00E6E6</color>
-            </IconStyle>
-            <LabelStyle>
-              <color>FF00E6E6</color>
-            </LabelStyle>
-          </Style>
-          <Point>
-            <altitudeMode>clampToGround</altitudeMode>
-            <coordinates>-122.4508833,45.6103093,0</coordinates>
-          </Point>
-        </Placemark>
-        <Placemark>
-          <name>Lap 1</name>
-          <description><![CDATA[19.13km, 37:51, 30.3kph]]></description>
-          <styleUrl>#gv_waypoint</styleUrl>
-          <Style>
-            <IconStyle>
-              <color>FF00E6E6</color>
-            </IconStyle>
-            <LabelStyle>
-              <color>FF00E6E6</color>
-            </LabelStyle>
-          </Style>
-          <Point>
-            <altitudeMode>clampToGround</altitudeMode>
-            <coordinates>-122.4508955,45.6101715,0</coordinates>
-          </Point>
-        </Placemark>
-      </Folder>
-    </Folder>
     <Folder id="Tracks">
       <name>Tracks</name>
       <visibility>1</visibility>
